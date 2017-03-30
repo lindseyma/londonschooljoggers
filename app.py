@@ -3,11 +3,9 @@ from utils import map
 
 app=Flask(__name__)
 
-'''put in html file nme'''
-
 @app.route("/")
 def root():
-	return render_template("
+	return render_template("index.html")
 
 if __name__ == '__main__':
 	app.debug = True
