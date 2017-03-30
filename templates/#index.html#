@@ -5,9 +5,5 @@
     <script src=http://d3js.org/d3.v3.min.js charset="utf-8"></script>
     <title>Labor vs. Health</title>
 	</head>
-
-	<body>
-		  <svg id="svg" height="500" width="500" style="border: 1px solid" xmlns="http://www.w3.org/2000/svg"></svg>
-	</body>
-
-</html>
+<body> 
+</html> 
