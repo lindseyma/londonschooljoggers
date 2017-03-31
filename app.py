@@ -1,7 +1,7 @@
 from flask import Flask, render_template
-from utils import map
+#from utils import map
 
-app = Flask(__name___)
+app = Flask(__name__)
 app.secret_key="idkjustsomethingrandom"
 
 @app.route('/')
