@@ -5,9 +5,18 @@
     <script src=http://d3js.org/d3.v3.min.js charset="utf-8"></script>
     <title>Labor vs. Health</title>
 	</head>
-
 	<body>
 		  <svg id="svg" height="500" width="500" style="border: 1px solid" xmlns="http://www.w3.org/2000/svg"></svg>
 	</body>
+<script>
+var svg = d3.select("svg")
+	margin = {top: 20, right: 20, bottom: 30, left: 50},
+    width = +svg.attr("width") - margin.left - margin.right,
+    height = +svg.attr("height") - margin.top - margin.bottom,
+    g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+
+
+
+</script>
 </html>
