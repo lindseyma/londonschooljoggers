@@ -2,20 +2,49 @@
 
 <html>
   <head>
-    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-    <title>Labor vs. Health</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="main.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <title>Labor vs. Health</title>
+
   </head>
-  <body>
-    <svg id="svg" height="500" width="500" style="border: 1px solid" xmlns="http://www.w3.org/2000/svg"></svg>
+
+
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="navbar-header">
+    <a class="navbar-brand" href="#">London School Joggers</a>
+  </div>
+  <div> 
+    <ul class = "nav navbar-nav">
+     <li class = "active"> <a class="navbar-link" href="#"> Unemployment and Drug Use </a> </li>
+     <li> <a class="navbar-link" href="#"> About </a> </li>
+   </ul>
+  </div>
+  </nav>
+
+  <div class="container">
+  <div class="jumbotron">
+    <h1> Unemployment//Drug Use</h1>      
+    <p>This graph shows unemployment data against drug rates nationally over a period of time </p>
+    </div>
+    </div>
+
+<div class="container" align="center">
+  <svg id="svg" height="500" width="500" style="border: 1px solid" xmlns="http://www.w3.org/2000/svg"></svg>
+  </div>
   </body>
+
+
   <script>
     var svg = d3.select("svg"),
     margin = {top: 20, right: 20, bottom: 30, left: 50},
     width = +svg.attr("width") - margin.left - margin.right,
     height = +svg.attr("height") - margin.top - margin.bottom,
-    g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-    
+    g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");  
     
   </script>
 </html>
