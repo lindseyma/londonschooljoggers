@@ -99,7 +99,7 @@ def OneYearUnemployedRates(i):
 	return 100 - OneYearEmployedRates(i)
 
 def OneYearDict(i):
-	return dict([(("Employed"), OneYearEmployedRates(i)), (("Unemployed"), OneYearUnemployedRates(i), ("Year",i))])
+	return dict([("Year",i), (("Employed"), OneYearEmployedRates(i)), (("Unemployed"), OneYearUnemployedRates(i))])
 
 def makeLaborList():
 	list=[]
