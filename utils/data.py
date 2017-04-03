@@ -16,7 +16,7 @@ def getAlcoholRates(iter):
 
 
 drug_list = drugs.get_reports()
-print drug_list[1]["State"]
+#print drug_list[1]
 
 def OneYearDrugRates(i):
 	totalpop = 0
@@ -72,9 +72,27 @@ def makeAlcoholList():
 		list.append(OneYearAlcoholRates(i))
 	return list
 
-print makeDrugList()
+#labor
+#print labor_list[1]
+
+'''print makeDrugList()
 print makePainList()
-print makeAlcoholList()
+print makeAlcoholList()'''
+
+#only find employment rates
+def population(iter):
+	return labor_list[iter]["Civilian Noninstitutional Population"]["White"] + labor_list[iter]["Civilian Noninstitutional Population"]["Black or African American"]
+def getWhiteRates(iter):
+	return labor_list[iter]["Employed"]["White"]["Counts"]["All"] / labor_list[iter]["Civilian Noninstitutional Population"]["White"]
+def getAfAmRates(iter):
+	return labor_list[iter]["Employed"]["Black or African American"]["Counts"]["All"] / labor_list[iter]["Civilian Noninstitutional Population"]["Black or African American"]
+
+"""
+def OneYearLaborRates(i):
 
 
-
+def makeLaborList():
+	list=[]
+	for i in range(1,14):
+		list.append()
+"""
