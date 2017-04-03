@@ -1,12 +1,19 @@
-from flask import Flask, render_template, request
-from utils import map
+from flask import Flask, render_template
+#from utils import data
+import utils
 
-app=Flask(__name__)
 
-@app.route("/")
+app = Flask(__name__)
+app.secret_key="idkjustsomethingrandom"
+
+@app.route('/')
 def root():
-	return render_template("index.html")
+	DrugList = data.makeDrugList()
+	PainList = data.makePainList()
+	AlcoholList = data.makeAlcoholList()
+	return render_template('index.html')
 
 if __name__ == '__main__':
 	app.debug = True
 	app.run()
+

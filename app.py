@@ -1,6 +1,6 @@
 from flask import Flask, render_template
-from utils import data
-
+#from utils import data
+import utils
 
 
 app = Flask(__name__)
@@ -8,9 +8,9 @@ app.secret_key="idkjustsomethingrandom"
 
 @app.route('/')
 def root():
-	DrugList = makeDrugList()
-	PainList = makePainList()
-	AlcoholList = makeAlcoholList()
+	DrugList = data.makeDrugList()
+	PainList = data.makePainList()
+	AlcoholList = data.makeAlcoholList()
 	return render_template('index.html')
 
 if __name__ == '__main__':
