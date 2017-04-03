@@ -81,18 +81,26 @@ print makeAlcoholList()'''
 
 #only find employment rates
 def population(iter):
-	return labor_list[iter]["Civilian Noninstitutional Population"]["White"] + labor_list[iter]["Civilian Noninstitutional Population"]["Black or African American"]
+	return labor_list[iter]["Data"]["Civilian Noninstitutional Population"]["White"] + labor_list[iter]["Data"]["Civilian Noninstitutional Population"]["Black or African American"]
 def getWhiteRates(iter):
-	return labor_list[iter]["Employed"]["White"]["Counts"]["All"] / labor_list[iter]["Civilian Noninstitutional Population"]["White"]
+	return labor_list[iter]["Data"]["Employed"]["White"]["Counts"]["All"] / labor_list[iter]["Data"]["Civilian Noninstitutional Population"]["White"]
 def getAfAmRates(iter):
-	return labor_list[iter]["Employed"]["Black or African American"]["Counts"]["All"] / labor_list[iter]["Civilian Noninstitutional Population"]["Black or African American"]
+	return labor_list[iter]["Data"]["Employed"]["Black or African American"]["Counts"]["All"] / labor_list[iter]["Data"]["Civilian Noninstitutional Population"]["Black or African American"]
 
-"""
-def OneYearLaborRates(i):
+def OneYearEmployedRates(i):
+	return getWhiteRates((i-1972)*12) + getAfAmRates((i-1972)*12)
 
+def OneYearUnemployedRates(i):
+	return 100 - OneYearEmployedRates(i)
+
+def OneYearDict(i):
+	return dict([("Year",i), (("Employed"), OneYearEmployedRates(i)), (("Unemployed"), OneYearUnemployedRates(i))])
 
 def makeLaborList():
 	list=[]
-	for i in range(1,14):
-		list.append()
-"""
+	for i in range(2002,2014):
+		list.append(OneYearDict(i))
+	return list
+
+#print(population(1))
+print makeLaborList()
