@@ -1,6 +1,7 @@
 from flask import Flask, render_template
-#from utils import data
-import utils
+from utils import data
+import jQuery
+#import utils
 
 
 app = Flask(__name__)
