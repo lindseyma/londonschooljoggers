@@ -14,12 +14,7 @@ def getPainRates(iter):
 	return drug_list[iter]["Rates"]["Pain Relievers Abuse Past Year"]["26+"] + drug_list[iter]["Rates"]["Pain Relievers Abuse Past Year"]["18-25"]
 def getAlcoholRates(iter):
 	return drug_list[iter]["Rates"]["Alcohol"]["Abuse Past Year"]["26+"] + drug_list[iter]["Rates"]["Alcohol"]["Abuse Past Year"]["18-25"]
-def getMarijuanaRates(iter):
-	return drug_list[iter]["Rates"]["Marijuana"]["Used Past Month"]["26+"] + drug_list[iter]["Rates"]["Marijuana"]["Used Past Month"]["18-25"]
-def getCocaineRates(iter):
-	return drug_list[iter]["Rates"]["Illicit Drugs"]["Cocaine Used Past Year"]["26+"] + drug_list[iter]["Rates"]["Illicit Drugs"]["Cocaine Used Past Year"]["18-25"]
-def getTobaccoates(iter):
-	return drug_list[iter]["Rates"]["Tobacco"]["Use Past Month"]["26+"] + drug_list[iter]["Rates"]["Tobacco"]["Use Past Month"]["18-25"]
+
 
 drug_list = drugs.get_reports()
 #print drug_list[1]
@@ -60,42 +55,6 @@ def OneYearAlcoholRates(i):
 	rate = totalrate/totalpop
 	return round(rate * 100, 2)
 
-def OneYearMarijuanaRates(i):
-	totalpop = 0
-	totalrate = 0
-	start = 50* (i -1)
-	end = 50*i + 1
-	for num in range(start,end):
-		totalrate += (getMarijuanaRates(num)/100.0) * pop(num)
-		totalpop += pop(num)
-	totalrate = round(totalrate)
-	rate = totalrate/totalpop
-	return round(rate * 100, 2)
-
-def OneYearCocaineRates(i):
-	totalpop = 0
-	totalrate = 0
-	start = 50* (i -1)
-	end = 50*i + 1
-	for num in range(start,end):
-		totalrate += (getCocaineRates(num)/100.0) * pop(num)
-		totalpop += pop(num)
-	totalrate = round(totalrate)
-	rate = totalrate/totalpop
-	return round(rate * 100, 2)
-
-def OneYearTobaccoates(i):
-	totalpop = 0
-	totalrate = 0
-	start = 50* (i -1)
-	end = 50*i + 1
-	for num in range(start,end):
-		totalrate += (getTobaccoRates(num)/100.0) * pop(num)
-		totalpop += pop(num)
-	totalrate = round(totalrate)
-	rate = totalrate/totalpop
-	return round(rate * 100, 2)
-
 def makeDrugList():
 	list = []
 	for i in range(1,14):
@@ -114,21 +73,6 @@ def makeAlcoholList():
 		list.append(OneYearAlcoholRates(i))
 	return list
 
-def makeMarijuanaList():
-	list = []
-	for i in range(1,14):
-		list.append(OneYearAlcoholRates(i))
-	return list
-def makeCocaineList():
-	list = []
-	for i in range(1,14):
-		list.append(OneYearCocaineRates(i))
-	return list
-def makeTobaccoist():
-	list = []
-	for i in range(1,14):
-		list.append(OneYearTobaccoRates(i))
-	return list
 #labor
 #print labor_list[1]
 
@@ -155,7 +99,7 @@ def OneYearUnemployedRates(i):
 	return 100 - OneYearEmployedRates(i)
 
 def OneYearDict(i):
-	return dict([(("Employed"), OneYearEmployedRates(i)), (("Unemployed"), OneYearUnemployedRates(i)), ("Year",i)])
+	return dict([("Year",i), (("Employed"), OneYearEmployedRates(i)), (("Unemployed"), OneYearUnemployedRates(i))])
 
 def makeLaborList():
 	list=[]
