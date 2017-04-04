@@ -1,5 +1,6 @@
 import labor
 import drugs 
+from collections import OrderedDict
 
 labor_list = labor.get_results()
 drug_list = drugs.get_reports()
@@ -155,7 +156,7 @@ def OneYearUnemployedRates(i):
 	return 100 - OneYearEmployedRates(i)
 
 def OneYearDict(i):
-	return dict([(("Employed"), OneYearEmployedRates(i)), (("Unemployed"), OneYearUnemployedRates(i)), ("Year",i)])
+	return OrderedDict([("Year",i), (("Employed"), OneYearEmployedRates(i)), (("Unemployed"), OneYearUnemployedRates(i))])
 
 def makeLaborList():
 	list=[]
