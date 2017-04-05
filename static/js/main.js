@@ -18,7 +18,7 @@ var z = d3.scaleOrdinal()
 var stack = d3.stack()
     .offset(d3.stackOffsetExpand);
 
-d3.csv("../static/data.csv", type, function(data) {
+d3.csv("../static/drugs.csv", type, function(data) {
   data.sort(function(a, b) { return b[data.columns[1]] / b.total - a[data.columns[1]] / a.total; });
 
   x.domain(data.map(function(d) { return d.State; }));
