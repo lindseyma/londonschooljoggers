@@ -1,0 +1,35 @@
+Team London School Joggers
+Lindsey Ma, James Yang, Stiven Peter
+
+03.27.2017
+lindseyM - wrote readme
+jamesY - created design images
+
+03.28.2017
+jamesY - created design document
+
+03.29.2017
+databases added
+lindseyM - wrote basic flask file
+
+03.30.2017
+stivenP - wrote some html
+lindseyM - worked on html
+
+03.31.2017
+jamesY - edited app.py
+
+04.01.2017
+stivenP - worked with drug data; made lists 
+stivenP - edited html
+
+04.02.2017
+lindseyM - worked with labor data; made dictionaries with some data errors
+
+04.03.2017
+lindseyM - fixed data errors with labor
+jamesY - worked on javascript
+stivenP - continued working with line graph
+
+04.04.2017
+jamesY - fixed db issues; fixed path issues
