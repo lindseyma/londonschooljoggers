@@ -27,8 +27,8 @@
 
     <div class="container">
       <div class="jumbotron">
-	<h1 align="center"> Unemployment and Drug Use</h1>      
-	<p><center>This graph shows unemployment data against drug rates nationally over a period of time </center></p>
+	<h1 align="center"> Unemployment//Drug Use</h1>      
+	<p>This graph shows unemployment data against drug rates nationally over a period of time </p>
       </div>
     </div>
 
@@ -43,9 +43,13 @@
 	    <button type="submit" class="btn btn-default">Submit</button>
 	  </div>
       </form>
+      </div>
+    
+    <div class="container col-lg-6">
+      <svg id="bg"></svg>
     </div>
-    <div class="container" align="center">
-      <svg class="svg"></svg>
+    <div class="container col-lg-6">
+      <svg id="pc"></svg>
     </div>
 
   </body>
@@ -56,7 +60,7 @@
     height = 600 - margin.bottom - margin.top;
 
     // actual svg
-    var svg = d3.select(".svg")
+    var bg = d3.select("#bg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
@@ -65,17 +69,7 @@
     // actual data stuff
     var data = {{d | safe}};
     var year = {{year}};
-    console.log(year);
-    console.log(typeof(year));
-
-    // oops is useless stuff
-    var max = 0;
-    for (var key in data){
-    nMax = d3.min(d3.values(data[key]));
-    if (nMax > max){
-    max = nMax;
-    };
-    };
+    var data2 = {{l | safe}}[year];
 
     // scaling the axis
     var y = d3.scaleLinear()
@@ -87,7 +81,7 @@
     .rangeRound([0,width])
     .padding(.1);
 
-    svg.selectAll(".bar")
+    bg.selectAll(".bar")
     .data(d3.entries(data))
     .enter().append("rect")
     .attr("class","bar")
@@ -101,32 +95,87 @@
     var xAxis = d3.axisBottom(x);
     var yAxis = d3.axisLeft(y);
 
-    svg.append("g")
+    bg.append("g")
     .attr("class","x-axis")
     .attr("transform", "translate(0," + height + ")")
-    .call(xAxis) 
-    svg.append("text")
+    .call(xAxis); 
+    bg.append("text")
     .attr("x", width / 2 - margin.right)
     .attr("y", height + margin.bottom - 20)
     .style("font-variant", "small-caps")
     .text("Drugs");
-    svg.append("g")
+    bg.append("g")
     .attr("class","y-axis") 
     .call(yAxis)
-    svg.append("text")
+    bg.append("text")
     .attr("transform", "rotate(-90)") 
     .attr("y", - margin.right)
     .attr("x", - width / 2 + 3 * margin.left) 
     .style("text-anchor", "middle")
     .style("font-variant", "small-caps")
     .text("Percentage (%)");
-    svg.append("text")
+    bg.append("text")
     .attr("x", (width / 2))         
     .attr("y", 0 - (margin.top / 2)) 
     .attr("text-anchor", "middle") 
-    .style("font-size", "50px")   
+    .style("font-size", "40px")   
     .style("font-weight", "bold")
     .text("Drug Intake for " + year);
+
+
+    //bar graph stuff
+
+    //year is defined from bg
+
+    //color scale
+    var color = d3.scaleOrdinal(d3.schemeCategory20b);
+
+    // Alternative
+    //var color = d3.scaleBand().range(['#A60F2B', '#648C85']);
+
+    // setting dimensions of canvas
+    var margin2 = {top: 100, right: 40, bottom: 50, left: 60},
+    width2 = 500 - margin2.left - margin2.right,
+    height2 = 700 - margin2.bottom - margin2.top;
+    var radius = Math.min(width2,height2) / 2;
+
+    // actual svg
+    var pc = d3.select("#pc")
+    .attr("width", width2 + margin2.left + margin2.right)
+    .attr("height", height2 + margin2.top + margin2.bottom)
+    .append("g")
+    .attr("transform", "translate(" + (width2/2 + 50) + "," + (height2/2 + 100) + ")");
+
+
+    var arc = d3.arc()
+    .innerRadius(0)
+    .outerRadius(radius);
+
+    var pie = d3.pie()
+    .value(function(d) {return d.value;})
+    .sort(null);
+
+    var path = pc.selectAll('path')
+    .data(pie(d3.entries(data2)))
+    .enter()
+    .append('path')
+    .attr('d',arc)
+    .attr('fill', function(d,i){
+    return color(d.data.key);
+    })
+    .append("text")
+    .attr("transform", function(d){return "translate(" + arc.centroid(d) + ")";})
+    .attr("dy", "0.35em")
+    .text(function(d) {return d.value});
+
+
+    pc.append("text")
+    .attr("x", (0))         
+    .attr("y", (height) - 700) 
+    .attr("text-anchor", "middle") 
+    .style("font-size", "20px")   
+    .style("font-weight", "bold")
+    .text("Employment vs Unemployment for " + year);
   </script>
 
 

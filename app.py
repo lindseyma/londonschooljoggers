@@ -8,19 +8,16 @@ app.secret_key="idkjustsomethingrandom"
 
 @app.route('/', methods=["GET","POST"])
 def root():
-        if 'year' not in session:
-                d = data.compileList()
-                l = data.makeLaborList()
+        if 'year' not in session :
                 session['year'] = 0
-                return render_template('index.html',d=d,l=l)
-        else:
-                d = data.compileList()
-                l = data.makeLaborList()
-                session['year'] = request.form['year']
-                year = session['year']
-                print year
-                return render_template('index.html',d=d, year=year,l=l)
-        
+                return render_template('index.html')
+        d = data.compileList()
+        l = data.makeLaborList()
+        session['year'] = request.form['year']
+        year = session['year']
+        print year
+        return render_template('index.html',d=d, year=year,l=l)
+
 if __name__ == '__main__':
 	app.debug = True
 	app.run()
