@@ -192,10 +192,3 @@ def makeLaborList():
 	return dict
 
 #print(population(1))
-l =  makeLaborList()
-for labor in l:
-        print labor.keys()
-
-d = makeAlcoholList()
-for drug in d:
-       print drug
