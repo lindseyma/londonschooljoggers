@@ -118,7 +118,7 @@ def makeAlcoholList():
 def makeMarijuanaList():
 	list = []
 	for i in range(1,14):
-		list.append(OneYearAlcoholRates(i))
+		list.append(OneYearMarijuanaRates(i))
 	return list
 def makeCocaineList():
 	list = []
@@ -165,4 +165,10 @@ def makeLaborList():
 	return list
 
 #print(population(1))
-print makeLaborList()
+l =  makeLaborList()
+for labor in l:
+        print labor.keys()
+
+d = makeAlcoholList()
+for drug in d:
+       print drug

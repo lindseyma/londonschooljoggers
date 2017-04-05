@@ -1,8 +1,9 @@
 from flask import Flask, render_template
-from utils import data
+from utils import data, drugs, labor
 
 #import utils
 
+schema = labor._guess_schema('a')
 
 app = Flask(__name__)
 app.secret_key="idkjustsomethingrandom"

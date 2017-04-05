@@ -33,11 +33,57 @@
     </div>
 
     <div class="container" align="center">
-      <svg id="svg" height="500" width="500" style="border: 1px solid" xmlns="http://www.w3.org/2000/svg"></svg>
+        <svg id="svg"></svg>
     </div>
-  
+
   </body>
   <script src="../static/js/main.js">  </script>
+  <script>
+      // setting dimensions of canvas
+      var margin = {top: 30, right: 40, bottom: 50, left: 60},
+      width = 800 - margin.left - margin.right,
+      height = 800 - margin.bottom - margin.top;
+
+      // actual svg
+      var svg = d3.select(".svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+ 
+       // actual data stuff
+       var data = {{data | safe}}
+       var year = {{year}}
+       var max = 0;
+       for (var key in data){
+          //get the max here
+       }
+
+       //
+       var y = d3.scaleLinear()
+             .domain([max,0])
+             .range([0,height]);
+
+       //might have to change stuff here
+       var x = d3.scaleBand()
+                 .domain(d3.entries(data).map(function(d){return d.value[year];}));
+
+       svg.selectAll(".bar")
+          .data(d3.entries(data))
+          .enter().append("rect")
+          .attr("class","bar")
+          .attr("fill", "steelblue")
+          .attr("x", function(d){return x(d.keys)})
+          .attr("y", function(d){return y(d.values[year])})
+          .attr("height", function(d){return height - y(d.values[year])})
+          .attr("width", x.bandwidth());
+
+       //
+
+
+
+  </script>
+
 
 
 </html>
