@@ -1,3 +1,3 @@
 # londonschooljoggers
 
-This project will compare health data and labor data to see if there is a correlation. We will use CORGIS datasets. Users can choose a specific health problem from a drop down menu to generate an overlaid graph. The labor data will be displayed on the graph as a stacked bar graph out of 100 to portray the percentage of people employed vs. unemployed. A line graph will will show the percentage of people suffering from the health problem in each year.
+This project will compare drug data and labor data to see if there is a correlation. We will use CORGIS datasets. Users can choose a year from a 1992-2014 to generate two graphs. The labor data will be displayed in a pie chart to show the amount of employed people vs. unemployed in that year. A bar graph will show the percentage of people using each type of drug in the year you choose.
