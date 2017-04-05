@@ -158,7 +158,7 @@ def compileList():
                 dict['Tobacco'][i+1992] = tList[i]
         return dict
 
-print compileList()
+#print compileList()
 
 #only find employment rates
 def population(iter):
@@ -179,13 +179,17 @@ def OneYearUnemployedRates(i):
 	return 100 - OneYearEmployedRates(i)
 
 def OneYearDict(i):
-	return OrderedDict([("Year",i), (("Employed"), OneYearEmployedRates(i)), (("Unemployed"), OneYearUnemployedRates(i))])
+        dict = {}
+        dict['Employment'] = OneYearEmployedRates(i)
+        dict['Unemployment'] = OneYearUnemployedRates(i)
+        return dict
+#	return OrderedDict([("Year",i), (("Employed"), OneYearEmployedRates(i)), (("Unemployed"), OneYearUnemployedRates(i))])
 
 def makeLaborList():
-	list=[]
-	for i in range(2002,2015):
-		list.append(OneYearDict(i))
-	return list
+	dict = {}
+	for i in range(1992,2013):
+		dict[i] = OneYearDict(i)
+	return dict
 
 #print(population(1))
 print makeLaborList()
