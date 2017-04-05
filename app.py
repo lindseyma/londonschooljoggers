@@ -12,7 +12,8 @@ def root():
 	DrugList = data.makeDrugList()
 	PainList = data.makePainList()
 	AlcoholList = data.makeAlcoholList()
-	return render_template('index.html')
+        CompiledList = data.compileList()
+	return render_template('index.html',compilelist=CompiledList)
 
 if __name__ == '__main__':
 	app.debug = True
