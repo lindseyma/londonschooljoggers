@@ -145,25 +145,20 @@ def compileList():
                 cList.insert(0,6+random.random()*i)
                 tList.insert(0,74+random.random()*i)
         dict = {}
-        dict['Pain'] = []
-        dict['Alcohol'] = []
-        dict['Marijuana'] = []
-        dict['Cocaine'] = []
-        dict['Tobacco'] = []
+        dict['Pain'] = {}
+        dict['Alcohol'] = {}
+        dict['Marijuana'] = {}
+        dict['Cocaine'] = {}
+        dict['Tobacco'] = {}
         for i in range(0,21):
-                temp1 = { i+1992 : pList[i] }
-                dict['Pain'].append(temp1)
-                temp2 = { i+1992 : aList[i] }
-                dict['Alcohol'].append(temp2)
-                temp3 = { i+1992 : mList[i] }
-                dict['Marijuana'].append(temp3)
-                temp4 = { i+1992 : cList[i] }
-                dict['Cocaine'].append(temp4)
-                temp5 = { i+1992 : tList[i] }
-                dict['Tobacco'].append(temp5)
+                dict['Pain'][i+1992] = pList[i]
+                dict['Alcohol'][i+1992] = aList[i]
+                dict['Marijuana'][i+1992] = mList[i]
+                dict['Cocaine'][i+1992] = cList[i]
+                dict['Tobacco'][i+1992] = tList[i]
         return dict
 
-#print compileList()
+print compileList()
 
 #only find employment rates
 def population(iter):
