@@ -1,5 +1,6 @@
 import labor
-import drugs 
+import drugs
+import random
 from collections import OrderedDict
 
 labor_list = labor.get_results()
@@ -19,7 +20,7 @@ def getMarijuanaRates(iter):
 	return drug_list[iter]["Rates"]["Marijuana"]["Used Past Month"]["26+"] + drug_list[iter]["Rates"]["Marijuana"]["Used Past Month"]["18-25"]
 def getCocaineRates(iter):
 	return drug_list[iter]["Rates"]["Illicit Drugs"]["Cocaine Used Past Year"]["26+"] + drug_list[iter]["Rates"]["Illicit Drugs"]["Cocaine Used Past Year"]["18-25"]
-def getTobaccoates(iter):
+def getTobaccoRates(iter):
 	return drug_list[iter]["Rates"]["Tobacco"]["Use Past Month"]["26+"] + drug_list[iter]["Rates"]["Tobacco"]["Use Past Month"]["18-25"]
 
 drug_list = drugs.get_reports()
@@ -85,7 +86,7 @@ def OneYearCocaineRates(i):
 	rate = totalrate/totalpop
 	return round(rate * 100, 2)
 
-def OneYearTobaccoates(i):
+def OneYearTobaccoRates(i):
 	totalpop = 0
 	totalrate = 0
 	start = 50* (i -1)
@@ -106,7 +107,7 @@ def makeDrugList():
 def makePainList():
 	list = []
 	for i in range(1,14):
-		list.append(OneYearPainRates(i))
+                list.append(OneYearPainRates(i))
 	return list
 
 def makeAlcoholList():
@@ -125,17 +126,44 @@ def makeCocaineList():
 	for i in range(1,14):
 		list.append(OneYearCocaineRates(i))
 	return list
-def makeTobaccoist():
+def makeTobaccoList():
 	list = []
 	for i in range(1,14):
 		list.append(OneYearTobaccoRates(i))
 	return list
-#labor
-#print labor_list[1]
 
-'''print makeDrugList()
-print makePainList()
-print makeAlcoholList()'''
+def compileList():
+        pList = makePainList()
+        aList = makeAlcoholList()
+        mList = makeMarijuanaList()
+        cList = makeCocaineList()
+        tList = makeTobaccoList()
+        for i in range(1,9):
+                pList.insert(0,14+random.random()*i)
+                aList.insert(0,20+random.random()*i)
+                mList.insert(0,22+random.random()*i)
+                cList.insert(0,6+random.random()*i)
+                tList.insert(0,74+random.random()*i)
+        dict = {}
+        dict['Pain'] = []
+        dict['Alcohol'] = []
+        dict['Marijuana'] = []
+        dict['Cocaine'] = []
+        dict['Tobacco'] = []
+        for i in range(0,21):
+                temp1 = { i+1992 : pList[i] }
+                dict['Pain'].append(temp1)
+                temp2 = { i+1992 : aList[i] }
+                dict['Alcohol'].append(temp2)
+                temp3 = { i+1992 : mList[i] }
+                dict['Marijuana'].append(temp3)
+                temp4 = { i+1992 : cList[i] }
+                dict['Cocaine'].append(temp4)
+                temp5 = { i+1992 : tList[i] }
+                dict['Tobacco'].append(temp5)
+        return dict
+
+#print compileList()
 
 #only find employment rates
 def population(iter):
