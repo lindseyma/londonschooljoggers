@@ -1,43 +1,122 @@
 <!DOCTYPE html>
 
 <html>
-  <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../static/css/main.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="http://d3js.org/d3.v4.min.js" charset="utf-8"></script>
-    <title>Labor vs. Health</title>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../static/css/main.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="http://d3js.org/d3.v4.min.js" charset="utf-8"></script>
+        <title>Labor vs. Health</title>
 
-  </head>
+    </head>
 
-  
-  <body>
-    <nav class="navbar navbar-inverse">
-      <div class="navbar-header">
-	<a class="navbar-brand" href="#">London School Joggers</a>
-      </div>
-      <div> 
-	<ul class = "nav navbar-nav">
-	  <li class = "active"> <a class="navbar-link" href="#"> Unemployment and Drug Use </a> </li>
-	  <li> <a class="navbar-link" href="#"> About </a> </li>
-	</ul>
-      </div>
-    </nav>
+    
+    <body>
+        <nav class="navbar navbar-inverse">
+            <div class="navbar-header">
+	              <a class="navbar-brand" href="#">London School Joggers</a>
+            </div>
+            <div> 
+	              <ul class = "nav navbar-nav">
+	                  <li class = "active"> <a class="navbar-link" href="#"> Unemployment and Drug Use </a> </li>
+	                  <li> <a class="navbar-link" href="#"> About </a> </li>
+	              </ul>
+            </div>
+        </nav>
 
-    <div class="container">
-      <div class="jumbotron">
-	<h1 align="center"> Unemployment//Drug Use</h1>      
-	<p>This graph shows unemployment data against drug rates nationally over a period of time </p>
-      </div>
-    </div>
+        <div class="container">
+            <div class="jumbotron">
+	              <h1 align="center"> Unemployment//Drug Use</h1>      
+	              <p>This graph shows unemployment data against drug rates nationally over a period of time </p>
+            </div>
+        </div>
 
-    <div class="container" align="center">
-      <svg id="svg" height="500" width="500" style="border: 1px solid" xmlns="http://www.w3.org/2000/svg"></svg>
-    </div>
-  
-  </body>
-  <script src="../static/js/main.js">  </script>
+        <div class="container" align="center">
+            <svg class="svg"></svg>
+        </div>
+
+    </body>
+    <script>
+     // setting dimensions of canvas
+     var margin = {top: 150, right: 40, bottom: 50, left: 60},
+         width = 600 - margin.left - margin.right,
+         height = 600 - margin.bottom - margin.top;
+
+     // actual svg
+     var svg = d3.select(".svg")
+                 .attr("width", width + margin.left + margin.right)
+                 .attr("height", height + margin.top + margin.bottom)
+                 .append("g")
+                 .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+     
+     // actual data stuff
+     var data = {{d | safe}};
+     var year = {{year}};
+     console.log(year);
+     console.log(typeof(year));
+
+     // oops is useless stuff
+     var max = 0;
+     for (var key in data){
+         nMax = d3.min(d3.values(data[key]));
+         if (nMax > max){
+             max = nMax;
+         };
+     };
+
+     // scaling the axis
+     var y = d3.scaleLinear()
+               .domain([100,0])
+               .range([0,height]);
+
+     var x = d3.scaleBand()
+             .domain(d3.entries(data).map(function(d){return d.key;}))
+             .rangeRound([0,width])
+             .padding(.1);
+
+     svg.selectAll(".bar")
+        .data(d3.entries(data))
+        .enter().append("rect")
+        .attr("class","bar")
+        .attr("fill", "green")
+        .attr("x", function(d){return x(d.key)})
+        .attr("y", function(d){return y(d.value[year])})
+        .attr("height", function(d){return height - y(d.value[year])})
+        .attr("width", x.bandwidth());
+
+     //x,y axis
+     var xAxis = d3.axisBottom(x);
+     var yAxis = d3.axisLeft(y);
+
+     svg.append("g")
+        .attr("class","x-axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis) 
+     svg.append("text")
+        .attr("x", width / 2 - margin.right)
+        .attr("y", height + margin.bottom - 20)
+        .style("font-variant", "small-caps")
+        .text("Drugs");
+     svg.append("g")
+        .attr("class","y-axis") 
+        .call(yAxis)
+     svg.append("text")
+        .attr("transform", "rotate(-90)") 
+        .attr("y", - margin.right)
+        .attr("x", - width / 2 + 3 * margin.left) 
+        .style("text-anchor", "middle")
+        .style("font-variant", "small-caps")
+        .text("Percentage (%)");
+     svg.append("text")
+        .attr("x", (width / 2))         
+        .attr("y", 0 - (margin.top / 2)) 
+        .attr("text-anchor", "middle") 
+        .style("font-size", "50px")   
+        .style("font-weight", "bold")
+        .text("Drug Intake for " + year);
+    </script>
+
 
 
 </html>
